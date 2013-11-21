@@ -1,0 +1,40 @@
+{
+  "name": "winston-axon",
+  "version": "0.1.0",
+  "description": "A message oriented transport for Winston based on axon",
+  "private": false,
+  "preferGlobal": false,
+  "main": "index.js",
+  "scripts": {
+    "test": "vows test/*-test.js --spec"
+  },
+  "dependencies" : {
+     "axon": ">=1.0.0"
+  },
+  "analyze": false,
+  "devDependencies": {
+    "winston": ">=0.7.2",
+    "vows": ">=0.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mgesmundo/winston-axon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mgesmundo/winston-axon/issues"
+  },
+  "keywords": [
+     "winston",
+     "axon",
+     "logging",
+     "sysadmin",
+     "tools",
+     "log",
+     "socket"
+  ],
+  "author": "Marcello Gesmundo",
+  "license": "MIT",
+  "engines": {
+    "node": ">=0.8"
+  }
+}
