@@ -53,8 +53,7 @@ Create your own server use this simple example:
 
     // wait for incoming logs
     sock.on('message', function(msg) {
-      var incoming = JSON.parse(msg);
-      logger.log(incoming.level, incoming);
+      logger.log(msg.level, msg);
     });
 
     logger.info('server started');

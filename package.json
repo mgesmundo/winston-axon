@@ -1,6 +1,6 @@
 {
   "name": "winston-axon",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A message oriented transport for Winston based on axon",
   "private": false,
   "preferGlobal": false,
