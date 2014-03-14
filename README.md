@@ -32,15 +32,8 @@ Create your own server use this simple example:
     var axon = require('axon');
     var winston = require('winston');
 
-    // define json codec for axon
-    axon.codec.define('json', {
-      encode: JSON.stringify,
-      decode: JSON.parse
-    });
-
     // set socket
     var sock = axon.socket('pull');
-    sock.format('json');
     sock.bind('tcp://127.0.0.1:3000');
 
     // create a customized Console Transport
@@ -60,11 +53,11 @@ Create your own server use this simple example:
 
     // wait for incoming logs
     sock.on('message', function(msg) {
-      logger.log(msg.level, msg);
+      var incoming = JSON.parse(msg);
+      logger.log(incoming.level, incoming);
     });
 
     logger.info('server started');
-
 
 Save as _server.js_ and start the server:
 
@@ -90,8 +83,9 @@ Save as _client.js_ and start it:
 
 Now in your previous terminal session (that when the server is running) you see this new lines:
 
-    debug:  message=, error=false, level=debug, timestamp=2013-11-21T11:22:37.975Z
-    info:  anything=This is metadata, level=info, message=Test Log Message, timestamp=2013-11-21T11:22:37.977Z
+    debug:  level=debug, message=Debug text only message, timestamp=2014-03-14T14:22:18.536Z
+    debug:  custom=Test Object Log Message, error=false, level=debug, message=Debug exented message, timestamp=2014-03-14T14:22:18.537Z
+    info:  anything=This is metadata, level=info, message=Test Log Message, timestamp=2014-03-14T14:22:18.538Z
 
 Note that into the client terminal you see only the _info_ message whereas into the server terminal you see all messages because the server has a customized level of the Console Transport.
 

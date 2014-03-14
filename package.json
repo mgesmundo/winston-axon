@@ -1,6 +1,6 @@
 {
   "name": "winston-axon",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "A message oriented transport for Winston based on axon",
   "private": false,
   "preferGlobal": false,
@@ -9,7 +9,7 @@
     "test": "vows test/*-test.js --spec"
   },
   "dependencies" : {
-     "axon": ">=1.0.0"
+     "axon": ">=2.0.0"
   },
   "analyze": false,
   "devDependencies": {
