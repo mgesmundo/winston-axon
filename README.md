@@ -1,10 +1,10 @@
 # winston-axon
 
-This is a message oriented Transport for [winston][2] based on [axon][1] .
+This is a message oriented Transport for [winston][2] based on [axon-secure][1].
 
 ## Motivation
 
-If you have a large application with a lot of independent services, you can easy log every service with a unique socket logging endpoint using [axon][1] as message-oriented library.
+If you have a large application with a lot of independent services, you can easy log every service with a unique socket logging endpoint using [axon-secure][1] as message-oriented library.
 
 ## Installation
 
@@ -18,7 +18,10 @@ When you add `winston-axon` to your [winston][2] logger, you can provide this op
 
 * __host__: (Default: 127.0.0.1) Remote host of the socket logging endpoint
 * __port__: (Default: 3000) Remote port of the socket logging endpoint
-* __timestamp__: (Default false) Boolean flag indicating if we should add a timestamp to the output. If function is specified, its return value will be used instead of timestamps.
+* __timestamp__: (Default false) Boolean flag indicating if we should add a timestamp to the output. If function is specified, its return value will be used instead of timestamps
+* __secure__: (Default: `false`) set `true` to encrypt every message
+* __cipher__: (Default: `aes256`) the cipher used for encryption
+* __secret__: (Default: `secret` **remember to change it!**) the shared password for encryption.
 
 ## Usage
 
@@ -29,11 +32,17 @@ To use this plugin you must have a socket logging endpoint (server) and at least
 Create your own server use this simple example:
 
     // dependencies
-    var axon = require('axon');
+    var axon = require('axon-secure');
     var winston = require('winston');
 
-    // set socket
-    var sock = axon.socket('pull');
+    // set socket with encryption
+    var sock = axon.socket('pull', {
+      secure: true,
+      cipher: 'aes256',
+      secret: 'password'
+    });
+    // or set socket without encryption
+    // var sock = axon.socket('pull');
     sock.bind('tcp://127.0.0.1:3000');
 
     // create a customized Console Transport
@@ -70,7 +79,13 @@ Into the client simply add `winston-axon` as new Transport to your winston insta
 
     var winston = require('winston');
     var Axon = require('winston-axon').Axon;
-    winston.add(Axon, { level: 'debug', timestamp: new Date() });
+    winston.add(Axon, {
+      level: 'debug',
+      timestamp: new Date(),
+      secure: true,
+      cipher: 'aes256',
+      secret: 'password'
+    });
     winston.debug({ message: 'Test Object Log Message', error: false });
     winston.log('info', 'Test Log Message', { anything: 'This is metadata' });
 
@@ -88,7 +103,7 @@ Now in your previous terminal session (that when the server is running) you see 
 
 Note that into the client terminal you see only the _info_ message whereas into the server terminal you see all messages because the server has a customized level of the Console Transport.
 
-For more information please refer to [winston][2] and [axon][1] documentations.
+For more information please refer to [winston][2] and [axon-secure][1] documentations.
 
 ## Run Tests
 
@@ -98,5 +113,5 @@ Like other Transport plugins, all of the winston-axon tests are written in vows,
 
 
 
-[1]: https://npmjs.org/package/axon
+[1]: https://npmjs.org/package/axon-secure
 [2]: https://npmjs.org/package/winston

@@ -1,6 +1,6 @@
 {
   "name": "winston-axon",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "A message oriented transport for Winston based on axon",
   "private": false,
   "preferGlobal": false,
@@ -9,12 +9,12 @@
     "test": "vows test/*-test.js --spec"
   },
   "dependencies" : {
-     "axon": ">=2.0.0"
+     "axon-secure": "~2.0.1"
   },
   "analyze": false,
   "devDependencies": {
-    "winston": ">=0.7.2",
-    "vows": ">=0.6.0"
+    "winston": "~0.7.3",
+    "vows": "~0.7.0"
   },
   "repository": {
     "type": "git",
@@ -35,6 +35,6 @@
   "author": "Marcello Gesmundo",
   "license": "MIT",
   "engines": {
-    "node": ">=0.8"
+    "node": ">=0.10"
   }
 }

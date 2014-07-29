@@ -36,7 +36,7 @@ var vows = require('vows');
 var assert = require('assert');
 var helpers = require('winston/test/helpers');
 var Axon = require('../lib/winston-axon').Axon;
-var axon = require('axon');
+var axon = require('axon-secure');
 
 function assertAxon (transport) {
   assert.instanceOf(transport, Axon);
